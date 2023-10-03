@@ -10,14 +10,19 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-app.get('/download', (req, res) => {
-    var URL = req.query.URL;
+app.get('/getInfo', async (req, res) => {
+    let givenURL = req.query.URL;
+    const urlParams = new URL(givenURL);
+    let response = await ytdl.getInfo(urlParams.searchParams.get('v'));
+    return res.json({ title: response.videoDetails.title, author: response.videoDetails.author.name });
 
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
 
-    ytdl(URL, {
-        format: 'mp4'
-    }).pipe(res);
+
+    // res.header('Content-Disposition', 'attachment; filename="video.mp4"');
+
+    // return ytdl(URL, {
+    //     format: 'mp4'
+    // }).pipe(res);
 });
 
 app.listen(4000, () => {
