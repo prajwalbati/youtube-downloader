@@ -1,16 +1,19 @@
 {
   "name": "youtube-downloader",
   "version": "1.0.0",
-  "description": "",
+  "description": "Youtube downloader sample",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "ytdl-core": "^0.29.1"
+    "express": "^4.18.2",
+    "ytdl-core": "^4.11.5"
   }
 }
