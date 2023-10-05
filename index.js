@@ -14,15 +14,10 @@ app.get('/getInfo', async (req, res) => {
     let givenURL = req.query.URL;
     const urlParams = new URL(givenURL);
     let response = await ytdl.getInfo(urlParams.searchParams.get('v'));
-    return res.json({ title: response.videoDetails.title, author: response.videoDetails.author.name });
 
+    // let format = ytdl.chooseFormat(response.formats, { quality: '134' });
 
-
-    // res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-
-    // return ytdl(URL, {
-    //     format: 'mp4'
-    // }).pipe(res);
+    return res.json({ title: response.videoDetails.title, author: response.videoDetails.author.name, embedUrl: response.videoDetails.embed, formats: response.formats });
 });
 
 app.listen(4000, () => {

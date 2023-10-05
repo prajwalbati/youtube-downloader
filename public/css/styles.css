@@ -3,7 +3,7 @@
 }
 .heading {
     font-family: Arial;
-    margin-top:40vh;
+    margin-top:20vh;
 }
 .URL-input, .convert-button {
     font-size:1.3em;
@@ -30,4 +30,26 @@
 
 .hidden {
     display: none;
+}
+
+.videoDetails {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.videoDetails .embededVideo {
+    float:left;
+}
+
+.videoDetails .videoFormats {
+    float: right;
+}
+
+.videoDetails .embededVideo, .videoDetails .videoFormats {
+    width: 45%
+}
+
+.videoDetails .embededVideo iframe {
+    width: 100%;
+    height: 400px;
 }
