@@ -25,6 +25,7 @@
     border:2px solid #0485ff;
     background: #0485ff;
     color:white;
+    cursor: pointer;
 }
 
 .hidden {
