@@ -24,9 +24,9 @@ app.get("/download", async (req, res) => {
     let itag = req.query.itag;
     let response = await ytdl.getInfo(givenURL);
 
-    const output = path.resolve(__dirname+'/public/videos', `video-${response.videoDetails.videoId}.mp4`);
+    const output = path.resolve(__dirname+'/public/videos', `video-${generateRandomString(5)}-${response.videoDetails.videoId}.mp4`);
 
-    const video = ytdl.downloadFromInfo(response, {quality:18});
+    const video = ytdl.downloadFromInfo(response, {quality:itag});
     let starttime;
     video.pipe(fs.createWriteStream(output));
     video.once('response', () => {
@@ -49,6 +49,18 @@ app.get("/download", async (req, res) => {
     });
 
 });
+
+function generateRandomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
 
 app.listen(4000, () => {
   console.log('Server listening in the port 4000');
