@@ -21,12 +21,29 @@ async function sendURL(URL) {
     iframeElem.setAttribute('src', data.embedUrl.iframeUrl);
 
     let embedVideoElem = document.querySelector('.embededVideo');
+    embedVideoElem.innerHTML = "";
     embedVideoElem.appendChild(iframeElem);
 
-    let formatList = document.querySelector(".formats");
+    let formatList = document.querySelector(".formatsTbl tbody");
+    formatList.innerHTML = "";
     for (let i = 0; i < data.formats.length; i++) {
-        let list = document.createElement("li");
-        list.innerHTML = 'itag: ' + data.formats[i].itag;
+        let list = document.createElement("tr");
+        let format = data.formats[i];
+        console.log(format);
+        // console.log(format.approxDurationMs/1000);
+        list.innerHTML = `<td>${format.itag}</td><td>${format.container}</td><td>${format.quality}</td><td>${format.qualityLabel}</td><td>${format.width}X${format.height}</td><td>${format.codecs}</td><td>${format.bitrate}</td><td>${format.audioBitrate}</td><td><a href="/download?URL=${URL}&itag=${format.itag}">Download</a></td>`;
         formatList.appendChild(list);
     }
+}
+
+
+
+async function downloadVideo(itag) {
+    console.log(itag);
+    let url = URLinput.value;
+    console.log(url);
+
+    const response = await fetch(`/download?URL=${url}&itag=${itag}`);
+    const data = await response.json();
+    console.log(data);
 }
